@@ -13,7 +13,7 @@ async def get_reply(bot: TelegramClient, event: Message) ->  Message:
     """
     try:
         async with bot.conversation(event.chat_id) as conv:
-            handle = conv.wait_event(events.NewMessage(chats=event.chat_id, from_users=event.chat_id))
+            handle = conv.wait_event(events.NewMessage(chats=event.chat_id, from_users=event.sender_id))
             return await handle
     except asyncio.TimeoutError:
         return await get_reply(event)
